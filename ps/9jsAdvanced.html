@@ -1,0 +1,410 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+  <title>Advanced JavaScript</title>
+  <!-- Include .js file here if required, say,
+  <script src = "js/advancedJavaScript.js"></script>
+  -->
+</head>
+<script>
+/*
+Advanced JavaScript or Object-Oriented JavaScript.
+
+Objects
+In the context of a web page, a JavaScript object is any scriptable HTML element. Outside the context of a web page, these 'core objects' are not associated with HTML elements, but with the language itself e.g. date and function.
+
+Object Properties
+A JavaScript property has a similar relationship to the object it belongs to in the way that an HTML tag attribute has to the tag that contains it. For example, the JavaScript "src" property is to an image object as the HTML "src" attribute is to an image tag.
+
+Property: document.getElementById("myImg1").src = "art/97.webp"
+Attribute: <img id="myImg1" src="art/97.webp"></img>.
+
+Object Methods
+Within a web page, methods cause an otherwise static HTML document to react to the end user. This results in a meaningful experience for the end user which would otherwise be completely one-sided e.g. alert(), write() and focus().
+
+Lets say the human body is a JavaScript object. Two properties of the body object would be its height and its hand. The height property doesn't really do anything,it is just a characteristic of the body - so it is not an object in and of itself, it is only a property of the body. The hand however can do many things and has its own special characteristics, so it is also considered an object. A writing action of the hand object would be considered a hand method. Just for fun, take a look at what the syntax for telling the hand to write the word 'hello' in JavaScript might look like:
+body.hand.write("Hello").
+
+// The four primary concepts behind Encapsulation, Abstraction, Inheritance and Polymorphism
+
+When we make objects with properties and methods bundled inside an object it’s known as encapsulation.
+
+When these methods and attributes are abstracted from other objects, this is known as abstraction.
+
+Abstraction and encapsulation are complementary concepts.
+
+Inheritance lets programmers create new classes that share some of the attributes of existing classes. This lets us build on previous work without reinventing the wheel.
+
+Polymorphism lets programmers use the same word to mean different things in different contexts.
+
+Encapsulation
+Is a method of making a complex system easier to handle for programmers. It wraps the data and code that operates on the data into a single entity, preventing direct (unauthorized) access to that entity. To achieve an encapsulation in JavaScript:
+
+    a)  Use var keyword to make data members private.
+    b)  Use setter methods to set the data and getter methods to get that data.
+
+Example
+In object-oriented programming, a class expression is an extensible program-code-template for creating objects, providing initial values for state (member variables) and implementations of behavior (member functions or methods).
+*/
+class Student                   // Class Expression
+  {
+    constructor()
+    {
+       var name;                // member variable 1
+       var marks;               // member variable 2
+    }
+
+      getName()
+        {
+          return this.name;     // getter method 1
+        }
+
+      setName(name)
+        {
+          this.name=name;       // setter method 1
+        }
+
+      getMarks()
+        {
+          return this.marks;    // getter method 2
+        }
+
+      setMarks(marks)
+        {
+          this.marks=marks;     // setter method 2
+        }
+
+    }
+
+// The above related encapsulation code could be loaded from an obfuscated file as identified in the HTML 'head' element.
+
+    var stud=new Student();
+        stud.setName("John");
+        stud.setMarks(80);
+        alert("Exclusion example 1: Student " + stud.getName()+" achieved "+stud.getMarks() + " marks");
+
+    var stud=new Student();
+        stud.setName("David");
+        stud.setMarks(76);
+        alert("Exclusion example 2: Student " +  stud.getName()+" achieved "+stud.getMarks() + " marks");
+
+/*
+
+Abstraction
+Is a way of hiding certain details and only showing the essential features of the object.
+
+Example
+*/
+
+// Abstract Class Constructor
+Vehicle = function(){}
+
+Vehicle.prototype.display=function()
+  { return "The vehicle is a "+this.vehicleName; }
+
+// Constructor
+function Bike(vehicleName)
+  { this.vehicleName=vehicleName; }
+
+// Add a property.
+Bike.prototype=Object.create(Vehicle.prototype);
+
+var bike=new Bike("BMW");
+alert("Abstraction example 1: " +bike.display());
+
+var bike=new Bike("Honda");
+alert("Abstraction example 2: " +bike.display());
+
+
+
+/* Inheritance
+JavaScript does not have classes like other languages. It uses the concept of prototypes for inheritance. It uses the concept of prototypes for inheritance. Inheritance allows programmers to create classes that are built upon existing classes, and this makes it possible that a class created through inheritance inherites the attributes and methods of the parent class.
+
+Example
+SuperType constructor function */
+function SuperType(){
+	this.name = "Robert Brown"
+}
+
+//SuperType prototype
+SuperType.prototype.getSuperName = function(){
+	return this.name
+}
+
+//SubType prototype function
+function SubType(){
+	this.age = 26
+}
+
+//Inherit the properties from SuperType
+SubType.prototype = new SuperType();
+
+//Add new property to SubType prototype
+SubType.prototype.getSubAge = function(){
+	return this.age;
+}
+
+var subTypeObj = new SubType();
+alert("Inheritance example 1a: Name is " + subTypeObj.name);
+alert("Inheritance example 1b: Age is " + subTypeObj.age);
+alert("Inheritance example 2a: Inherited Name is " + subTypeObj.getSuperName());
+alert("Inheritance example 2b: Inherited Age is " + subTypeObj.getSubAge());
+/*
+Above code defines two constructor functions, SuperType and SubType. By default, SubType.prototype has a constructor function which points to the constructor function itself and proto property which inherits the default object properties.
+
+Inherit the properties from SuperType
+SubType.prototype = new SuperType();
+Above line rewrites the default prototype property of the SubType constructor function and makes SubType.prototype to point to an object of SuperType constructor function.
+
+This means that all the properties and methods that exist on an instance of SuperType will now exist on SubType.prototype also. This means that now, SubType function has access to all the SuperType properties and methods.
+
+Add new property to SubType prototype
+SubType.prototype.getSubAge = function(){return this.age;}
+
+After the default prototype of SubType constructor function has been overwritten, by using the above line of code we add a new method getSubAge() on top of what was inherited from SuperType, to the prototype object of SubType constructor function.
+
+Note: New methods must be added to the SubType after the inheritance because inheritance overwrites the existing prototype of SubType.
+
+
+Polymorphism
+The primary usage of Polymorphism in Object-Oriented Programming is the ability of objects belonging to different types to respond to methods, fields, or property calls of the same name, each one according to an appropriate type-specific behaviour.
+
+The programmer does not have to know the exact type of the object in advance, and so the exact behaviour is determined at run-time. This is what we call late binding or dynamic binding (this make Polymorphism a very neat feature). Requirements are such that, there must be properties with the same name and the same parameter sets in all the superclasses, subclasses and interfaces.
+
+Example   */
+class Employee{
+    constructor(name, age){
+        this.name = name;
+        this.age = 29;
+    }
+    EmployeeName(){
+        alert(`Polymorphism example: Employee Name ${this.name} and age ${this.age}`);
+    }
+}
+
+class Member extends Employee{
+    constructor(name, salary, age){
+        super(name);
+        this.name = name;
+        this.salary = salary;
+//      this.age = age;            // Note alert age is 29. If comment removed the second class method will override the parent class method (age = 34).
+    }
+
+    EmployeeName(){
+        alert(`Polymorphism example: Employee Name ${this.name} and salary ${this.salary} and age ${this.age}`);
+   }
+
+}
+
+const mb = new Member("Graham Davies", 39500, 34);
+mb.EmployeeName();
+
+/*So when you execute this statement you will get your alert message - employee name and his salary.
+
+You can see here we had specified two methods with the same name. So the second child class method will override the parent class method. You can also notice we are accessing both class methods using the child class instance. Now suppose if you wanted to alert the parent class method then just comment this child method or change the name of this method,
+*/
+
+</script>
+<body style="font-family:Arial, Helvetica, sans-serif">
+<h1>Exclusion Abstraction Inheritance and Polymorphism (JavaScript Examples)</h1>
+
+<textarea style="height:520px; width:1350px";>
+Advanced JavaScript or Object-Oriented JavaScript.
+
+Objects
+In the context of a web page, a JavaScript object is any scriptable HTML element. Outside the context of a web page, these 'core objects' are not associated with HTML elements, but with the language itself e.g. date and function.
+
+Object Properties
+A JavaScript property has a similar relationship to the object it belongs to in the way that an HTML tag attribute has to the tag that contains it. For example, the JavaScript "src" property is to an image object as the HTML "src" attribute is to an image tag.
+
+Property: document.getElementById("myImg1").src = "art/97.webp"
+Attribute: <img id="myImg1" src="art/97.webp"></img>.
+
+Object Methods
+Within a web page, methods cause an otherwise static HTML document to react to the end user. This results in a meaningful experience for the end user which would otherwise be completely one-sided e.g. alert(), write() and focus().
+
+Lets say the human body is a JavaScript object. Two properties of the body object would be its height and its hand. The height property doesn't really do anything,it is just a characteristic of the body - so it is not an object in and of itself, it is only a property of the body. The hand however can do many things and has its own special characteristics, so it is also considered an object. A writing action of the hand object would be considered a hand method. Just for fun, take a look at what the syntax for telling the hand to write the word 'hello' in JavaScript might look like:
+body.hand.write("Hello").
+
+The four primary concepts behind Encapsulation, Abstraction, Inheritance and Polymorphism
+
+When we make objects with properties and methods bundled inside an object it’s known as encapsulation.
+
+When these methods and attributes are abstracted from other objects, this is known as abstraction.
+
+Abstraction and encapsulation are complementary concepts.
+
+Inheritance lets programmers create new classes that share some of the attributes of existing classes. This lets us build on previous work without reinventing the wheel.
+
+Polymorphism lets programmers use the same word to mean different things in different contexts.
+
+Encapsulation
+Is a method of making a complex system easier to handle for programmers. It wraps the data and code that operates on the data into a single entity, preventing direct (unauthorized) access to that entity. To achieve an encapsulation in JavaScript:
+
+    a)  Use var keyword to make data members private.
+    b)  Use setter methods to set the data and getter methods to get that data.
+
+Example
+In object-oriented programming, a class is an extensible program-code-template for creating objects, providing initial values for state (member variables) and implementations of behavior (member functions or methods).
+
+class Student
+  {
+    constructor()
+    {
+       var name;                // member variable 1
+       var marks;               // member variable 2
+    }
+
+      getName()
+        {
+          return this.name;     // getter method 1
+        }
+
+      setName(name)
+        {
+          this.name=name;       // setter method 1
+        }
+
+      getMarks()
+        {
+          return this.marks;    // getter method 2
+        }
+
+      setMarks(marks)
+        {
+          this.marks=marks;     // setter method 2
+        }
+
+    }
+
+The above related encapsulation code could be loaded from an obfuscated file as identified in the HTML 'head' element.
+
+    var stud=new Student();
+        stud.setName("John");
+        stud.setMarks(80);
+        alert("Exclusion example 1: Student " + stud.getName()+" Achieved "+stud.getMarks());
+
+    var stud=new Student();
+        stud.setName("David");
+        stud.setMarks(76);
+        alert("Exclusion example 2: Student " +  stud.getName()+" Achieved "+stud.getMarks());
+
+
+
+Abstraction
+Is a way of hiding certain details and only showing the essential features of an object. So in a way, Abstraction means hiding the real implementation and we, as a user, knowing only how to use it.
+
+Example
+
+// Abstract Class Constructor
+Vehicle = function(){}
+
+Vehicle.prototype.display=function()
+  { return "Vehicle is: "+this.vehicleName; }
+
+// Constructor
+function Bike(vehicleName)
+  { this.vehicleName=vehicleName; }
+
+// Add a property.
+Bike.prototype=Object.create(Vehicle.prototype);
+
+var bike=new Bike("BMW");
+alert("Abstraction example 1: " +bike.display());
+
+var bike=new Bike("HONDA");
+alert("Abstraction example 2: " +bike.display());
+
+
+Inheritance
+JavaScript does not have classes like other languages. It uses the concept of prototypes for inheritance. Inheritance allows programmers to create classes that are built upon existing classes, and this makes it possible that a class created through inheritance inherites the attributes and methods of the parent class.
+
+Example
+SuperType constructor function */
+function SuperType(){
+	this.name = "Robert Brown"
+}
+
+//SuperType prototype
+SuperType.prototype.getSuperName = function(){
+	return this.name
+}
+
+//SubType prototype function
+function SubType(){
+	this.age = 26
+}
+
+//Inherit the properties from SuperType
+SubType.prototype = new SuperType();
+
+//Add new property to SubType prototype
+SubType.prototype.getSubAge = function(){
+	return this.age;
+}
+
+var subTypeObj = new SubType();
+alert("Inheritance example: Name is " + subTypeObj.name);
+alert("Inheritance example: Age is " + subTypeObj.age);
+alert("Inheritance example: Inherited Name is " + subTypeObj.getSuperName());
+alert("Inheritance example: Inherited Age is " + subTypeObj.getSubAge());
+
+Above code defines two constructor functions, SuperType and SubType. By default, SubType.prototype has a constructor function which points to the constructor function itself and proto property which inherits the default object properties.
+
+Inherit the properties from SuperType
+SubType.prototype = new SuperType();
+Above line rewrites the default prototype property of the SubType constructor function and makes SubType.prototype to point to an object of SuperType constructor function.
+
+This means that all the properties and methods that exist on an instance of SuperType will now exist on SubType.prototype also. This means that now, SubType function has access to all the SuperType properties and methods.
+
+Add new property to SubType prototype
+SubType.prototype.getSubAge = function(){return this.age;}
+
+After the default prototype of SubType constructor function has been overwritten, by using the above line of code we add a new method getSubAge() on top of what was inherited from SuperType, to the prototype object of SubType constructor function.
+
+Note: New methods must be added to the SubType after the inheritance because inheritance overwrites the existing prototype of SubType.
+
+Polymorphism.
+The primary usage of Polymorphism in Object-Oriented Programming is the ability of objects belonging to different types to respond to methods, fields, or property calls of the same name, each one according to an appropriate type-specific behaviour.
+
+The programmer does not have to know the exact type of the object in advance, and so the exact behaviour is determined at run-time. This is what we call late binding or dynamic binding (this make Polymorphism a very neat feature). Requirements are such that, there must be properties with the same name and the same parameter sets in all the superclasses, subclasses and interfaces.
+
+
+class Employee{
+    constructor(name, age){
+        this.name = name;
+        this.age = 29;
+    }
+    EmployeeName(){
+        alert(`Polymorhism example: Employee Name ${this.name} and age ${this.age}`);
+    }
+}
+
+class Member extends Employee{
+    constructor(name, salary, age){
+        super(name);
+        this.name = name;
+        this.salary = salary;
+//      this.age = age;            // Note alert age is 29. If comment removed the second class method will override the parent class method (age = 34).
+    }
+
+    EmployeeName(){
+        alert(`Polymorhism example: Employee Name ${this.name} and salary ${this.salary} and age ${this.age}`);
+   }
+
+}
+
+const mb = new Member("Graham Davies", 39500, 34);
+mb.EmployeeName();
+
+So when you execute this statement you will get your alert message - employee name and his salary.
+
+You can see here we had specified two methods with the same name. So the second child class method will override the parent class method. You can also notice we are accessing both class methods using the child class instance. Now suppose if you wanted to alert the parent class method then just comment this child method or change the name of this method,
+
+
+</textarea>
+</body>
+
+</html>

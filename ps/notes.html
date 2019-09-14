@@ -1,0 +1,108 @@
+<style>a{
+text-decoration:none; color:red;
+}
+</style>
+<a href="https://www.html.am/tags/"   target="_blank">HTML Tag List</a>
+<textarea style="height:600; width:1350; font-size:18px; spellcheck:false">
+
+<!DOCTYPE HTML>
+
+Always add the <!DOCTYPE HTML> tag declaration to your HTML documents, so that the browser knows what type of document to expect.
+---------------------------------------------------------------------
+
+<html>
+This tag is the container for all other HTML elements (except for the <!DOCTYPE> tag).
+
+Most HTML elements are written with a start tag (or opening tag) and an end tag (or closing tag), with content in between.
+
+An HTML element encompasses opening tag, closing tag and content e.g. <p>This is the content</p>.
+---------------------------------------------------------------------
+
+<head>
+This tag can include other elements; a title for the webpage, scripts, styles, meta information, and more. For example:
+
+<title>
+This is displayed at the top of the browser. Search engines often use it as a way to find web pages when a user types and searches for certain keywords. Search Engine Optimisation (SEO).
+</title>
+
+<script>
+Say, JavaScript if you need something while the body is loading it would be appropriate to put it a script element in the head.
+</script>, and
+
+<meta>
+This is often used in the head, say, to define page refresh rate, describe the webpage content and identify its author. No closing tag needed in HTML.
+---------------------------------------------------------------------
+
+<style>
+This tag is used to define how HTML elements should be displayed (or how HTML elements should render in a browser).
+
+body {
+    background-color: lightblue;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+}
+---------------------------------------------------------------------
+
+<script>
+This tag is used to define a client-side list of instructions to be executed (JavaScript).
+
+In a programming language, these programming instructions are called statements.
+
+var x, y, z;    // Statement 1
+x = 5;          // Statement 2
+y = 6;          // Statement 3
+z = x + y;      // Statement 4
+
+A JavaScript program is a list of programming statements.
+
+---------------------------------------------------------------------
+
+<body>
+This element represents the main content section of the HTML document. It contains the entire content of a webpage.
+---------------------------------------------------------------------
+
+<?php
+
+All of the above HTML elements are actioned by the web browser (say, CHROME); a CLIENT-SIDE environment that displays a webpage.
+
+Whereas PHP is a dynamic programming laguage and part of the SERVER-SIDE environment (in our case the WAMP localhost environment). With PHP, you can connect to and manipulate databases using MySql. The HTTP APACHE Server processes incoming network requests over HTTP (and other related protocols). APACHE accept requests from clients and send responses to those requests.
+
+a) APACHE accepts the request (from CHROME).
+b) It sends request to our application server (to PHP/MySql).
+c) APACHE remains in waiting/running state until it gets a response from the application server (PHP/MySql).
+d) Apache sends back request to client (to CHROME).
+
+When PHP parses a file (the process of analysing a string of symbols, or data structures conforming to the rules of the PHP program language), it looks for opening and closing tags, which are <?php and ?> which tell PHP to start and stop interpreting the code between them.
+
+PHP is a server scripting language, and a powerful tool for making dynamic and interactive Web pages.
+
+An example of using MYSQL in PHP
+Establish a connection to a server, username, password and database, say, as follows:
+$con=mysqli_connect("server", "username", "password", "database");  say, $con=mysqli_connect("localhost", "root", "", "saturn");
+
+The mysqli_connect() function opens a new connection to the MySQL server as specified and returns an object representing the connection to the variable $con. Variables are "containers" for storing information.
+
+Generally, variables start with the $ sign, followed by the name of the variable and the name must start with a letter or the underscore character for example $con or $_GET.
+
+Check to see if the connection ($con) was NOT successful.
+if (!$con)
+    {
+    die('Could not connect: ' . mysqli_connect_errno());
+    }
+
+The query string (name/value pairs) is sent in the URL when using the HTTP GET Method.
+
+Check and capture the query string sent in the URL (http://www.url.com?email=value1&password=value2).
+
+if (isset($_GET['email']))
+{$x = $_GET['email'];
+}
+$x will contain value1
+
+if (isset($_GET['password']))
+{$y = $_GET['password'];
+}
+$y will contain value2
